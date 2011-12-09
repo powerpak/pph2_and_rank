@@ -56,9 +56,13 @@ where the score is produces by summing the PolyPhen2 scores and dividing
 by the AA sequence length of the gene product times 1000. It is sent
 to standard output, with progress messages sent to standard error.
 
-To save the output from the script, redirect standard output:
+To save the output from the script, either redirect standard output:
 
     $ ./pph2_and_rank.py mutations.txt > output.txt
+
+or use the `-o` or `--output` option:
+
+    $ ./pph2_and_rank.py -o output.txt mutations.txt
 
 [Roth Laboratory]: http://llama.mshri.on.ca/
 [PolyPhen2]: http://genetics.bwh.harvard.edu/pph2/
