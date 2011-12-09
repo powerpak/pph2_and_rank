@@ -10,6 +10,13 @@ Written by Ted Pak for the [Roth Laboratory][].
 
 Released under an [MIT license][]; please see MIT-LICENSE.txt.
 
+BeautifulSoup, an included library, is released under a new BSD-style license.  
+Please see its source code or [website][] for more details.
+
+## Requirements
+
+Any modern *nix with Python >=2.6 installed.  This includes Mac OS X.
+
 ## Usage
 
     $ ./pph2_and_rank.py [-h|--help] [-q|--quiet] [-s|--sid SID]
@@ -67,3 +74,4 @@ or use the `-o` or `--output` option:
 [Roth Laboratory]: http://llama.mshri.on.ca/
 [PolyPhen2]: http://genetics.bwh.harvard.edu/pph2/
 [MIT license]: http://en.wikipedia.org/wiki/MIT_license
+[website]: http://www.crummy.com/software/BeautifulSoup/
