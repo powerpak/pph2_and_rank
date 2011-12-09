@@ -17,20 +17,20 @@ Released under an [MIT license][]; please see MIT-LICENSE.txt.
     
 ### Options
 
-* `-h, --help` displays a simple usage message.
+* `-h` or `--help` displays a simple usage message.
 
-* `-o, --output=OUTPUT` will cause output to be written to the file named by
-  OUTPUT instead of sending it to standard output.
+* `-o OUTPUT` or `--output OUTPUT` will cause output to be written to the
+  file named by OUTPUT instead of sending it to standard output.
 
-* `-q, --quiet` will suppress the status updates normally sent to standard
-  error.
-
-* `-s, --sid=SID` allows you to specify a previous GGI session ID that the
-  script will re-attach to.  In this case, all the `MUT_LIST_$N` inputs are
-  ignored.  Use this when a previous script has already submitted information
-  to PolyPhen2 but the script was prematurely terminated.  The SID is displayed
-  in the status messages that this script prints to standard error once it has
-  been received from PolyPhen's GGI status page.
+* `-q` or `--quiet` will suppress the status updates normally sent to
+  standard error.
+  
+* `-s SID` or `--sid SID` allows you to specify a previous GGI session ID
+  that the script will re-attach to. In this case, all the `MUT_LIST_$N` inputs
+  are ignored. Use this when a previous script has already submitted
+  information to PolyPhen2 but the script was prematurely terminated. The SID
+  is displayed in the status messages that this script prints to standard error
+  once it has been received from PolyPhen's GGI status page.
   
 ### Input
 
