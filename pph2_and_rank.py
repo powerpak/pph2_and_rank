@@ -1,6 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""\
+pph2_and_rank.py
+
+Submits a list of genes with SNPs to PolyPhen2 and orders them by
+a score measuring the overall deleteriousness of the mutations, 
+normalized for protein length.
+
+LICENSE
+
+Written by Ted Pak for the Roth Laboratory (http://llama.mshri.on.ca).
+
+Released under an MIT license; please see MIT-LICENSE.txt.
+"""
+
 USAGE = """\
 Usage: %s [-h|--help] [-q|--quiet] [-s|--sid SID] [-o|--output OUTPUT]
        MUT_LIST_1 [MUT_LIST_2 ...]
