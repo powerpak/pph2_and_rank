@@ -1,4 +1,4 @@
-# `pph2_and_rank.py`
+# pph2_and_rank.py
 
 Submits a list of genes with SNPs to [PolyPhen2][] and orders them by
 a score measuring the overall deleteriousness of the mutations, 
