@@ -1,0 +1,65 @@
+# `pph2_and_rank.py`
+
+Submits a list of genes with SNPs to [PolyPhen2][] and orders them by
+a score measuring the overall deleteriousness of the mutations, 
+normalized for protein length.
+
+## License
+
+Written by Ted Pak for the [Roth Laboratory][].
+
+Released under an [MIT license][]; please see MIT-LICENSE.txt.
+
+## Usage
+
+    $ ./pph2_and_rank.py [-h|--help] [-q|--quiet] [-s|--sid SID]
+        [-o|--output OUTPUT] MUT_LIST_1 [MUT_LIST_2 ...]
+    
+### Options
+
+* `-h, --help` displays a simple usage message.
+
+* `-o, --output=OUTPUT` will cause output to be written to the file named by
+  OUTPUT instead of sending it to standard output.
+
+* `-q, --quiet` will suppress the status updates normally sent to standard
+  error.
+
+* `-s, --sid=SID` allows you to specify a previous GGI session ID that the
+  script will re-attach to.  In this case, all the `MUT_LIST_$N` inputs are
+  ignored.  Use this when a previous script has already submitted information
+  to PolyPhen2 but the script was prematurely terminated.  The SID is displayed
+  in the status messages that this script prints to standard error once it has
+  been received from PolyPhen's GGI status page.
+  
+### Input
+
+`MUT_LIST_1`, `MUT_LIST_2` and so on must be files where each line follows
+the form `acc_id mut_1 mut_2 mut_3 ...` and each `mut_$n` is the
+concatenation of the canonical AA, the position, and mutated AA. For
+example:
+
+    Q92889 I706T E875G
+    Q6ZSZ5 L763F
+    Q32M45 Q390P E463Q A549T E570K P686H
+
+If any one of the `MUT_LIST_$N` arguments is set to `-` (hyphen), the list
+is read from standard input until EOF is encountered. Therefore, you can
+also do:
+
+    $ cat mutations_1.txt mutations_2.txt | ./pph2_and_rank.py -
+
+### Output
+
+The output is a tab-delimited table of genes sorted by their score,
+where the score is produces by summing the PolyPhen2 scores and dividing
+by the AA sequence length of the gene product times 1000. It is sent
+to standard output, with progress messages sent to standard error.
+
+To save the output from the script, redirect standard output:
+
+    $ ./pph2_and_rank.py mutations.txt > output.txt
+
+[Roth Laboratory]: http://llama.mshri.on.ca/
+[PolyPhen2]: http://genetics.bwh.harvard.edu/pph2/
+[MIT license]: http://en.wikipedia.org/wiki/MIT_license
