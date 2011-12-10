@@ -19,12 +19,18 @@ Any modern *nix with Python >=2.6 installed.  This includes Mac OS X.
 
 ## Usage
 
-    $ ./pph2_and_rank.py [-h|--help] [-q|--quiet] [-s|--sid SID]
-        [-o|--output OUTPUT] MUT_LIST_1 [MUT_LIST_2 ...]
+    $ ./pph2_and_rank.py [-h|--help] [--hg19] [--humdiv] [-q|--quiet] [-s|--sid SID]
+           [-o|--output OUTPUT] MUT_LIST_1 [MUT_LIST_2 ...]
     
 ### Options
 
 * `-h` or `--help` displays a simple usage message.
+
+* `--hg19` tells PolyPhen2 to use build 19 of the human genome assembly instead 
+  of build 18.
+
+* `--humdiv` tells PolyPhen2 to use the HumDiv PolyPhen2 classifier model instead
+  of HumVar.
 
 * `-o OUTPUT` or `--output OUTPUT` will cause output to be written to the
   file named by OUTPUT instead of sending it to standard output.

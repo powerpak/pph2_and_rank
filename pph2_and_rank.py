@@ -16,10 +16,12 @@ Released under an MIT license; please see MIT-LICENSE.txt.
 """
 
 USAGE = """\
-Usage: %s [-h|--help] [-q|--quiet] [-s|--sid SID] [-o|--output OUTPUT]
-       MUT_LIST_1 [MUT_LIST_2 ...]
+Usage: %s [-h|--help] [--hg19] [--humdiv] [-q|--quiet] [-s|--sid SID]
+       [-o|--output OUTPUT] MUT_LIST_1 [MUT_LIST_2 ...]
 Options:
   -h|--help             Displays this message.
+  --hg19                Uses build 19 of the human genome assembly instead of build 18.
+  --humdiv              Uses the HumDiv PolyPhen2 classifier model instead of HumVar.
   -o|--output OUTPUT    Prints to file named OUTPUT instead of standard output.
   -q|--quiet            Do not print status messages to standard error.
   -s|--sid SID          Specify a pre-existing GGI SID.
@@ -259,7 +261,9 @@ if __name__=='__main__':
     help = False
     sid = None
     output = None
-    long_args = ["help", "quiet", "sid=", "output="]
+    humvar = True
+    hg19 = False
+    long_args = ["help", "hg19", "humdiv", "quiet", "sid=", "output="]
     try:
         try:
             opts, args = getopt.getopt(sys.argv[1:], 'ho:qs:', long_args)
@@ -268,6 +272,10 @@ if __name__=='__main__':
         for o, a in opts:
             if o in ("-h", "--help"):
                 help = True
+            elif o == "--hg19":
+                hg19 = True
+            elif o == "--humdiv":
+                humvar = False
             elif o in ("-q", "--quiet"):
                 quiet = True
             elif o in ("-o", "--output"):
@@ -289,7 +297,7 @@ if __name__=='__main__':
     
         setup_db()
         if sid is None:
-            sid = submit_to_polyphen2("\n".join(mut_lists))
+            sid = submit_to_polyphen2("\n".join(mut_lists), humvar, hg19)
             write_status("Received SID for GGI => %s\n" % sid)
             write_status("===\nTrack this job by visiting: %s\n===\n" % (pph2_track_url % sid))
         results = poll_for_polyphen2_results(sid)
