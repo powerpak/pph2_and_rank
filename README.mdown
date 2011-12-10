@@ -2,7 +2,7 @@
 
 Submits a list of genes with SNPs to [PolyPhen2][] and orders them by
 a score measuring the overall deleteriousness of the mutations, 
-normalized for protein length.
+normalized for gene product length in amino acids (AAs).
 
 ## License
 
@@ -49,8 +49,8 @@ Any modern *nix with Python >=2.6 installed.  This includes Mac OS X.
 
 `MUT_LIST_1`, `MUT_LIST_2` and so on must be files where each line follows
 the form `acc_id mut_1 mut_2 mut_3 ...` and each `mut_$n` is the
-concatenation of the canonical AA, the position, and mutated AA. For
-example:
+concatenation of the canonical AA, the position in the AA sequence, and the 
+mutated AA. For example:
 
     Q92889 I706T E875G
     Q6ZSZ5 L763F
