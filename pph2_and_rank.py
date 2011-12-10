@@ -199,7 +199,7 @@ def poll_for_polyphen2_results(sid):
         write_status(wait_msg % shortened, maxpos - pos, maxpos)
         spin(15)
     if curr_step != -1: write_status((wait_msg + done_msg) % steps[curr_step], True)
-    else: curr_step = 0
+    curr_step += 1
     while curr_step < len(steps): # Write out steps that were completed before last refresh.
         write_status((wait_msg + done_msg) % steps[curr_step])
         curr_step += 1
@@ -291,7 +291,7 @@ if __name__=='__main__':
         if sid is None:
             sid = submit_to_polyphen2("\n".join(mut_lists))
             write_status("Received SID for GGI => %s\n" % sid)
-            write_status("Track this job at: %s" % (pph2_track_url % sid))
+            write_status("===\nTrack this job by visiting: %s\n===\n" % (pph2_track_url % sid))
         results = poll_for_polyphen2_results(sid)
         update_db_with_results(results)
         update_db_with_seqlen_and_gene()
