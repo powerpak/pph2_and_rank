@@ -35,6 +35,8 @@ socket.setdefaulttimeout(10)
 
 pph2_url = 'http://genetics.bwh.harvard.edu/cgi-bin/ggi/ggi2.cgi'
 pph2_result_url = 'http://genetics.bwh.harvard.edu/ggi/pph2/%s/1/pph2-full.txt'
+pph2_track_url = 'http://genetics.bwh.harvard.edu/cgi-bin/ggi/ggi2.cgi?_ggi_project=PPHWeb2'\
+    + '&sid=%s&_ggi_target_manage=Refresh&_ggi_origin=manage'
 
 # If the list is too big to fit in memory, change this to a filename.
 db = sqlite3.connect(':memory:')
@@ -83,6 +85,7 @@ def write_status(msg, num=None, denom=None):
 def progress(curr, finish, width=10):
     """Creates a progress bar using unicode characters; the terminal must support unicode."""
     ticks = ['▂','▃','▄','▅','▆','▇']
+    finish = max(finish, 1)
     pct = max(curr, 0) / float(finish)
     bartip, barlen = math.modf(pct * width)
     bartip = ticks[int(len(ticks) * bartip)] if pct < 1.0 else ''
@@ -288,6 +291,7 @@ if __name__=='__main__':
         if sid is None:
             sid = submit_to_polyphen2("\n".join(mut_lists))
             write_status("Received SID for GGI => %s\n" % sid)
+            write_status("Track this job at: %s" % (pph2_track_url % sid))
         results = poll_for_polyphen2_results(sid)
         update_db_with_results(results)
         update_db_with_seqlen_and_gene()
